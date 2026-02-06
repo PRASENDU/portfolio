@@ -58,3 +58,56 @@ if (typingTextElement) {
         type();
     }
 }
+
+// Carousel Navigation
+const carousel = document.getElementById('archCarousel');
+const prevBtn = document.getElementById('arch-prev');
+const nextBtn = document.getElementById('arch-next');
+
+if (carousel && prevBtn && nextBtn) {
+    nextBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
+    });
+
+    prevBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: -carousel.clientWidth, behavior: 'smooth' });
+    });
+}
+
+// Hero Image Slider
+const heroSlides = document.querySelectorAll('.hero-slide');
+let currentHeroSlide = 0;
+
+if (heroSlides.length > 1) {
+    setInterval(() => {
+        heroSlides[currentHeroSlide].classList.remove('active');
+        currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+        heroSlides[currentHeroSlide].classList.add('active');
+    }, 4000); // Change every 4 seconds
+}
+
+
+// Network Architecture Carousel Auto-Scroll
+if (carousel) {
+    let autoScrollInterval;
+
+    const startAutoScroll = () => {
+        autoScrollInterval = setInterval(() => {
+            // Check if we reached the end
+            if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
+                // Scroll back to start
+                carousel.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                // Scroll to next slide
+                carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
+            }
+        }, 4000);
+    };
+
+    startAutoScroll();
+
+    // Pause on hover (optional, good UX)
+    carousel.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+    carousel.addEventListener('mouseleave', startAutoScroll);
+}
+
