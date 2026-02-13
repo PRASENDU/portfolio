@@ -137,10 +137,85 @@ h3 {
     min-width: 140px;
 }
 
-.logo i {
-    color: var(--accent-primary);
-    filter: drop-shadow(0 0 5px var(--accent-primary));
+.logo-icon-3d {
+    width: 4rem;
+    /* Even larger */
+    height: 4rem;
+    margin-right: 1rem;
+    filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.5));
+    animation: floatIcon 3s ease-in-out infinite alternate;
+    display: inline-block;
+    vertical-align: middle;
+    /* Ensure alignment */
 }
+
+@keyframes floatIcon {
+    0% {
+        transform: translateY(0) rotateY(0deg);
+    }
+
+    100% {
+        transform: translateY(-5px) rotateY(10deg);
+    }
+
+    /* Subtle 3D rotation */
+}
+
+@keyframes iconPulse {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.6));
+        transform: scale(1);
+    }
+
+    100% {
+        filter: drop-shadow(0 0 15px rgba(188, 19, 254, 0.8));
+        transform: scale(1.1);
+    }
+}
+
+/* Logo Slider Animation */
+.logo-slider {
+    height: 1.5rem;
+    overflow: hidden;
+    position: relative;
+    width: 200px;
+    /* Adjust based on longest word */
+}
+
+/* Logo Typewriter */
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-white);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 150px;
+    /* Prevent layout shift */
+    display: inline-block;
+}
+
+.logo-text::after {
+    content: '|';
+    display: inline-block;
+    color: var(--accent-primary);
+    animation: blinkCursor 0.8s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blinkCursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+
+
 
 .nav-links {
     display: flex;

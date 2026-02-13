@@ -194,3 +194,40 @@ if (canvas) {
     animate();
 }
 
+
+// Logo Typewriter Effect
+const logoElement = document.getElementById('logo-typewriter');
+if (logoElement) {
+    const logoTexts = ["PRASENDU", "MONDAL"];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeSpeed = 150;
+
+    function typeLogo() {
+        const currentText = logoTexts[textIndex];
+
+        if (isDeleting) {
+            logoElement.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+            typeSpeed = 100;
+        } else {
+            logoElement.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+            typeSpeed = 200;
+        }
+
+        if (!isDeleting && charIndex === currentText.length) {
+            isDeleting = true;
+            typeSpeed = 3000; // Pause at end
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % logoTexts.length;
+            typeSpeed = 500;
+        }
+
+        setTimeout(typeLogo, typeSpeed);
+    }
+
+    typeLogo();
+}
